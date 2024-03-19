@@ -17,42 +17,53 @@ TTile::~TTile() {
 	std::cout << "Deconstructing a TTile!!!" << std::endl;
 }
 
+bool TTile::renderBoarder() {
+	for(int i=0; i<3;i++) {
+		std::cout << _border_symbol;
+		if(_padding)
+			std::cout << " ";
+	}
+	if(_padding)
+			std::cout << " ";
+		return true;
+}
+
+bool TTile::renderContent() {
+	for(int i=0; i<3;i++) {
+		if(i==1) {
+			std::cout << _content;
+		} else {
+			std::cout << _border_symbol;
+		}
+		if(_padding)
+			std::cout << " ";
+	}
+	if(_padding)
+			std::cout << " ";
+	return true;
+}
+
 bool TTile::OnStageRender(STAGE stage) {
 	switch(stage) {
 		case STAGE_ONE:
 			// stage 1
-			for(int i=0; i<3;i++) {
-				std::cout << _border_symbol;
-				if(_padding)
-					std::cout << " ";
-			}
-			if(_padding)
-					std::cout << " ";
+			renderBoarder();
 			break;
 		case STAGE_TWO:
 			// stage 2
-			for(int i=0; i<3;i++) {
-				if(i==1) {
-					std::cout << _content;
-				} else {
-					std::cout << _border_symbol;
-				}
-				if(_padding)
-					std::cout << " ";
-			}
-			if(_padding)
-					std::cout << " ";
+			renderContent();
 			break;
 		case STAGE_THREE:
 			// Stage 3
-			for(int i=0; i<3;i++) {
-				std::cout << _border_symbol;
-				if(_padding)
-					std::cout << " ";
-			}
-			if(_padding)
-					std::cout << " ";
+			renderBoarder();
 			break;
+		case ALL_STAGES:
+			renderBoarder();
+			std::cout << std::endl;
+			renderContent();
+			std::cout << std::endl;
+			renderBoarder();
+			std::cout << std::endl;
 		default:
 			std::cout << "In TTile::OnStageRender(...) invalid stage given: " << stage << std::endl;
 			break;

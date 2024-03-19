@@ -33,12 +33,13 @@ int main()
 	
 	std::cout << std::endl;
 	
-	/*
-	TTile my_tile('-','C');
 	
+	TTile my_tile('-','C');
+	/*
 	my_tile.OnStageRender(STAGE_ONE);
 	my_tile.OnStageRender(STAGE_TWO);
 	my_tile.OnStageRender(STAGE_THREE);
 	*/
+	my_tile.OnStageRender(ALL_STAGES);
 	return 0;
 }

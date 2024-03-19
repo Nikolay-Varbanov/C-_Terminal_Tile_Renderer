@@ -5,7 +5,8 @@ enum STAGE {
 	INVALID_STAGE = -1,
 	STAGE_ONE,
 	STAGE_TWO,
-	STAGE_THREE
+	STAGE_THREE,
+	ALL_STAGES
 };
 
 class TTile {
@@ -17,6 +18,9 @@ class TTile {
 		TTile();
 		TTile(char border_symbol, char content, bool padding = true);
 		~TTile();
+	private: // Utilities
+		bool renderBoarder();
+		bool renderContent();
 	public: // Utilities
 		bool OnStageRender(STAGE stage);
 		bool setBorderSymbol(char symbol);
