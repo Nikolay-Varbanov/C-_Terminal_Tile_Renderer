@@ -16,6 +16,7 @@ class TChessBoard {
 		bool constructLinearCursor(std::string);
 	public: // Utilities
 		bool selectTile(std::string);
+		bool setCursor(int);
 };
 
 #endif

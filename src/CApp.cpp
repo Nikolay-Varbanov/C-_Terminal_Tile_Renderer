@@ -7,7 +7,8 @@ int main()
 	std::cout << "Hey I'm working here!!!" << std::endl;
 	
 	TChessBoard _myChessBoard;
-	_myChessBoard.selectTile("11");
+	_myChessBoard.selectTile("e4");
+	
 	/*
 	TTile my_tile_list[4];
 	for(int i=0;i<4;i++) {
