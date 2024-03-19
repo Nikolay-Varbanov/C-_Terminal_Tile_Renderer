@@ -64,6 +64,7 @@ bool TTile::OnStageRender(STAGE stage) {
 			std::cout << std::endl;
 			renderBoarder();
 			std::cout << std::endl;
+			break;
 		default:
 			std::cout << "In TTile::OnStageRender(...) invalid stage given: " << stage << std::endl;
 			break;
