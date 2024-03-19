@@ -8,6 +8,8 @@ enum STAGE {
 	STAGE_THREE,
 	ALL_STAGES
 };
+STAGE& operator++(STAGE& stage);
+STAGE operator++(STAGE& stage, int);
 
 class TTile {
 	private: // Facilities
@@ -24,6 +26,7 @@ class TTile {
 	public: // Utilities
 		bool OnStageRender(STAGE stage);
 		bool setBorderSymbol(char symbol);
+		char getBorderSymbol();
 		bool setContent(char content);
 };
 

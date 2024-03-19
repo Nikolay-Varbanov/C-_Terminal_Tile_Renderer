@@ -1,4 +1,5 @@
 #include <iostream>
+#include <string>
 #include "TTile.h"
 #include "TChessBoard.h"
 
@@ -6,8 +7,24 @@ int main()
 {
 	std::cout << "Hey I'm working here!!!" << std::endl;
 	
+	std::string input = " ";
+	
 	TChessBoard _myChessBoard;
-	_myChessBoard.selectTile("e4");
+	_myChessBoard.OnInit();
+	
+	std::cout << "Select a position on the board by giving the letter first and the number second" 
+						<< std::endl;
+						
+	std::cin >> input;
+	
+	_myChessBoard.selectTile(input);
+	_myChessBoard.OnRender();
+	_myChessBoard.deselectTile();
+	std::cout << "After deselectTile" << std::endl;
+	_myChessBoard.OnRender();
+	
+	
+	//_myChessBoard.selectTile("e4");
 	
 	/*
 	TTile my_tile_list[4];

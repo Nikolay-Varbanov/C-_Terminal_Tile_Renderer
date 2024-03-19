@@ -1,6 +1,22 @@
 #include <iostream>
 #include "TTile.h"
 
+// ++Operator for the enum
+// prefix (++stage)
+STAGE& operator++(STAGE& stage) {
+	// check for overflow
+	if(stage != ALL_STAGES)
+		stage = static_cast<STAGE>(stage + 1); // static_cast required
+	
+	return stage;
+}
+// postfix (stage++)
+STAGE operator++(STAGE& stage, int) {
+	STAGE rVal = stage;
+	++stage;
+	return rVal;
+}
+
 TTile::TTile() : _border_symbol('*'),
 								 _content('A'),
 								 _padding(true)	{
@@ -8,8 +24,8 @@ TTile::TTile() : _border_symbol('*'),
 }
 
 TTile::TTile(char border_symbol, char content, bool padding) : _border_symbol(border_symbol),
-																																			_content(content),
-																																			_padding(padding) {
+																															 _content(content),
+																															 _padding(padding) {
 	std::cout << "Constructing a TTile!!!" << std::endl;
 }
 
@@ -75,6 +91,10 @@ bool TTile::OnStageRender(STAGE stage) {
 bool TTile::setBorderSymbol(char symbol) {
 	_border_symbol = symbol;
 	return true;	
+}
+
+char TTile::getBorderSymbol() {
+	return _border_symbol;
 }
 
 bool TTile::setContent(char content) {
