@@ -33,7 +33,7 @@ TTile::~TTile() {
 	std::cout << "Deconstructing a TTile!!!" << std::endl;
 }
 
-bool TTile::renderBoarder() {
+bool TTile::renderBorder() {
 	for(int i=0; i<3;i++) {
 		std::cout << _border_symbol;
 		if(_padding)
@@ -63,7 +63,7 @@ bool TTile::OnStageRender(STAGE stage) {
 	switch(stage) {
 		case STAGE_ONE:
 			// stage 1
-			renderBoarder();
+			renderBorder();
 			break;
 		case STAGE_TWO:
 			// stage 2
@@ -71,14 +71,14 @@ bool TTile::OnStageRender(STAGE stage) {
 			break;
 		case STAGE_THREE:
 			// Stage 3
-			renderBoarder();
+			renderBorder();
 			break;
 		case ALL_STAGES:
-			renderBoarder();
+			renderBorder();
 			std::cout << std::endl;
 			renderContent();
 			std::cout << std::endl;
-			renderBoarder();
+			renderBorder();
 			std::cout << std::endl;
 			break;
 		default:

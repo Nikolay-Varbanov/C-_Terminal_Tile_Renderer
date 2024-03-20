@@ -21,7 +21,7 @@ class TTile {
 		TTile(char border_symbol, char content, bool padding = true);
 		~TTile();
 	private: // Utilities
-		bool renderBoarder();
+		bool renderBorder();
 		bool renderContent();
 	public: // Utilities
 		bool OnStageRender(STAGE stage);
