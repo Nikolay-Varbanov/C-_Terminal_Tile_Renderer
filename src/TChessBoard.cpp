@@ -6,8 +6,8 @@
 
 TChessBoard::TChessBoard() : _tile_address("a1"),
 														 _cursor(0),
-														 _selectedTileBorderCache(' '),
-														 _selectedTileCursorCache(-1) {
+														 _selectedCursor(-1),
+														 _selectedTileBorderCache(' ') {
 	std::cout << "Constructing a default TChessBoard" << std::endl;
 };
 
@@ -57,32 +57,34 @@ bool TChessBoard::constructLinearCursor(std::string raw_input) {
 
 bool TChessBoard::OnInit() {
 	bool init_state = false;
-	char padding = ' ';
+	char border = ' ';
+	char selected_border = '*';
 	for(int rows = 0; rows < 8; rows++) {
 		for(int columns = 0; columns < 8; columns++) {
 		if( (rows + 1) % 2 == 0) {
 			// row is even
 			if( (columns + 1) % 2 == 0) { // Odds are white even are black
 				// column is even
-				padding = '-'; // that is black
+				border = '-'; // that is black
 			} else {
 				// column is odd
-				padding = '+'; // that is white
+				border = '+'; // that is white
 				
 			}
 		} else {
 			// row is even
 			if( (columns + 1) % 2 == 0) { // Odds are black even are white
 				// column is even
-				padding = '+'; // that is white
+				border = '+'; // that is white
 			} else {
 				// column is odd
-				padding = '-'; // that is black
+				border = '-'; // that is black
 				
 			}
 		}
 			_cursor = coordinatesToCursor(columns, rows);
-			init_state = _boardTiles[_cursor].setBorderSymbol(padding);
+			init_state = _boardTiles[_cursor].setBorderSymbol(border);
+			init_state = _boardTiles[_cursor].setSelectedBorderSymbol(selected_border);
 		}
 	}
 	
@@ -117,36 +119,32 @@ bool TChessBoard::OnRender() {
 }
 
 bool TChessBoard::selectTile(std::string raw_input) {
-	bool select_state = false;
-	//deselectTile();
-	if(constructLinearCursor(raw_input)) {
-		std::cout << "Selection successful cursor is: " << _cursor << std::endl;
-		_selectedTileBorderCache = _boardTiles[_cursor].getBorderSymbol();
-		_selectedTileCursorCache = _cursor;
-		std::cout << "In TChessBoard::selectTile(std::string() cache is: " 
-							<< _selectedTileBorderCache 
-							<< std::endl;
-		if(_boardTiles[_cursor].setBorderSymbol('*'))
-			select_state = true;
-	} else {
-		std::cout << "Selection failed" << std::endl;
-		select_state = false;
+	bool select_status = false;
+	// Check if there is already a selected tile
+	if(_selectedCursor != -1) {
+		select_status = deselectTile();
+		if(select_status)
+			std::cout << "Deselect called from selectTile failed" << std::endl;
 	}
-	return select_state;
+	
+	if(constructLinearCursor(raw_input)) {
+		_selectedCursor = _cursor;
+		select_status = _boardTiles[_selectedCursor].flipSelectedState();
+	}
+	return select_status;
 }
 
 bool TChessBoard::deselectTile() {
-	bool deselect_state = false;
-	
-	if(_selectedTileBorderCache != ' ' || _selectedTileCursorCache < 0 ) {
-		deselect_state = _boardTiles[_selectedTileCursorCache].setBorderSymbol(_selectedTileBorderCache);
-		_selectedTileBorderCache = ' ';
-		_selectedTileCursorCache = -1;
+	bool deselect_status = false;
+	// Check if there is a selected tile
+	if(_selectedCursor != -1) {
+		deselect_status = _boardTiles[_selectedCursor].flipSelectedState();
+		_selectedCursor = -1;
+	} else {
+		deselect_status = false;
 	}
-	if(deselect_state != true)
-		std::cout << "deselect_state is false but why?" << std::endl;
 	
-	return deselect_state;
+	return deselect_status;
 }
 
 bool TChessBoard::setCursor(int cursor) {

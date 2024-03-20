@@ -19,13 +19,17 @@ STAGE operator++(STAGE& stage, int) {
 
 TTile::TTile() : _border_symbol('*'),
 								 _content('A'),
-								 _padding(true)	{
+								 _padding(true),
+								 _select_state(false),
+								 _selected_border_symbol('-') {
 	std::cout << "Constructing a default TTile!!!" << std::endl;
 }
 
-TTile::TTile(char border_symbol, char content, bool padding) : _border_symbol(border_symbol),
-																															 _content(content),
-																															 _padding(padding) {
+TTile::TTile(char border_symbol, char _selected_border_symbol, char content, bool padding) : _border_symbol(border_symbol),
+																																														 _content(content),
+																																														 _padding(padding),
+																																														 _select_state(false),
+																																														 _selected_border_symbol('-') {
 	std::cout << "Constructing a TTile!!!" << std::endl;
 }
 
@@ -35,7 +39,7 @@ TTile::~TTile() {
 
 bool TTile::renderBorder() {
 	for(int i=0; i<3;i++) {
-		std::cout << _border_symbol;
+		renderBorderSymbol();
 		if(_padding)
 			std::cout << " ";
 	}
@@ -44,18 +48,36 @@ bool TTile::renderBorder() {
 		return true;
 }
 
+bool TTile::renderBorderSymbol() {
+	if(_select_state) {
+		std::cout << _selected_border_symbol;
+	} else {
+		std::cout << _border_symbol;
+	}
+	return true;
+}
+
 bool TTile::renderContent() {
 	for(int i=0; i<3;i++) {
 		if(i==1) {
 			std::cout << _content;
 		} else {
-			std::cout << _border_symbol;
+			renderBorderSymbol();
 		}
 		if(_padding)
 			std::cout << " ";
 	}
 	if(_padding)
 			std::cout << " ";
+	return true;
+}
+
+bool TTile::flipSelectedState() {
+	if(_select_state) {
+		_select_state = false;
+	} else {
+		_select_state = true;
+	}
 	return true;
 }
 
@@ -95,6 +117,11 @@ bool TTile::setBorderSymbol(char symbol) {
 
 char TTile::getBorderSymbol() {
 	return _border_symbol;
+}
+
+bool TTile::setSelectedBorderSymbol(char symbol) {
+	_selected_border_symbol = symbol;
+	return true;
 }
 
 bool TTile::setContent(char content) {

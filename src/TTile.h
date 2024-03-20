@@ -14,19 +14,25 @@ STAGE operator++(STAGE& stage, int);
 class TTile {
 	private: // Facilities
 		char _border_symbol;
+		char _selected_border_symbol;
 		bool _padding;
 		char _content;
+		// States
+		bool _select_state;
 	public: // Constructs
 		TTile();
-		TTile(char border_symbol, char content, bool padding = true);
+		TTile(char border_symbol, char _selected_border_symbol, char content, bool padding = true);
 		~TTile();
 	private: // Utilities
 		bool renderBorder();
+		bool renderBorderSymbol();
 		bool renderContent();
 	public: // Utilities
+		bool flipSelectedState();
 		bool OnStageRender(STAGE stage);
 		bool setBorderSymbol(char symbol);
 		char getBorderSymbol();
+		bool setSelectedBorderSymbol(char symbol);
 		bool setContent(char content);
 };
 
