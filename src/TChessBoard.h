@@ -9,7 +9,6 @@ class TChessBoard {
 		TTile _boardTiles[64];
 		int _cursor;
 		int _selectedCursor;
-		char _selectedTileBorderCache;
 	public: // Constructs
 		TChessBoard();
 		~TChessBoard();
