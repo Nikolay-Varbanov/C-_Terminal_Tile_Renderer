@@ -157,10 +157,6 @@ bool TTile::setBorderSymbol(char symbol) {
 	return true;	
 }
 
-char TTile::getBorderSymbol() {
-	return _border_symbol;
-}
-
 bool TTile::setSelectedBorderSymbol(char symbol) {
 	_selected_border_symbol = symbol;
 	return true;

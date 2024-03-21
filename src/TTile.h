@@ -36,7 +36,6 @@ class TTile {
 		bool flipSelectedState();
 		bool OnRender();
 		bool setBorderSymbol(char symbol);
-		char getBorderSymbol();
 		bool setSelectedBorderSymbol(char symbol);
 		bool setContent(char content);
 };
