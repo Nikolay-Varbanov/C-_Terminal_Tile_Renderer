@@ -18,6 +18,8 @@ class TTile {
 		bool _padding;
 		char _content;
 		// States
+		bool _is_rendering;
+		bool _render_all_mode;
 		bool _select_state;
 	public: // Constructs
 		TTile();
@@ -28,6 +30,8 @@ class TTile {
 		bool renderBorderSymbol();
 		bool renderContent();
 	public: // Utilities
+		bool IsRendering();
+		bool setRenderingMode(bool);
 		bool flipSelectedState();
 		bool OnStageRender(STAGE stage);
 		bool setBorderSymbol(char symbol);

@@ -20,16 +20,23 @@ STAGE operator++(STAGE& stage, int) {
 TTile::TTile() : _border_symbol('*'),
 								 _content('A'),
 								 _padding(true),
+								 _is_rendering(false),
+								 _render_all_mode(false),
 								 _select_state(false),
 								 _selected_border_symbol('-') {
 	std::cout << "Constructing a default TTile!!!" << std::endl;
 }
 
-TTile::TTile(char border_symbol, char _selected_border_symbol, char content, bool padding) : _border_symbol(border_symbol),
-																																														 _content(content),
-																																														 _padding(padding),
-																																														 _select_state(false),
-																																														 _selected_border_symbol('-') {
+TTile::TTile(char border_symbol, 
+						 char _selected_border_symbol, 
+						 char content, 
+						 bool padding) : _border_symbol(border_symbol),
+														 _content(content),
+														 _padding(padding),
+														 _is_rendering(false),
+														 _render_all_mode(false),
+														 _select_state(false),
+														 _selected_border_symbol('-') {
 	std::cout << "Constructing a TTile!!!" << std::endl;
 }
 
@@ -70,6 +77,21 @@ bool TTile::renderContent() {
 	if(_padding)
 			std::cout << " ";
 	return true;
+}
+
+bool TTile::IsRendering() {
+	return _is_rendering;
+}
+
+bool TTile::setRenderingMode(bool render_all) {
+	bool set_state = false;
+	// Check if Tile is done rendering
+	if(!IsRendering()) {
+		_render_all_mode = render_all;
+		set_state = true;
+	}
+	
+	return set_state;
 }
 
 bool TTile::flipSelectedState() {
