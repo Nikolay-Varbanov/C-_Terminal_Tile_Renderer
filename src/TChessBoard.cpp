@@ -4,8 +4,7 @@
 #include "TChessBoard.h"
 #include "TTile.h"
 
-TChessBoard::TChessBoard() : _tile_address("a1"),
-														 _cursor(0),
+TChessBoard::TChessBoard() : _cursor(0),
 														 _selectedCursor(-1),
 														 _selectedTileBorderCache(' ') {
 	std::cout << "Constructing a default TChessBoard" << std::endl;
