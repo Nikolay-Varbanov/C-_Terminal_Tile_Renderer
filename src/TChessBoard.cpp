@@ -106,7 +106,7 @@ bool TChessBoard::OnRender() {
 			for(int columns = 0; columns < 8; columns++) {
 			
 				_cursor = coordinatesToCursor(columns, rows);
-				_boardTiles[_cursor].OnStageRender();
+				_boardTiles[_cursor].OnRender();
 			
 			}
 			std::cout << std::endl;

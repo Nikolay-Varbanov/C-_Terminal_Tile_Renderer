@@ -29,11 +29,12 @@ class TTile {
 		bool renderBorder();
 		bool renderBorderSymbol();
 		bool renderContent();
+		bool OnStageRender();
 	public: // Utilities
 		bool IsRendering();
 		bool setRenderingMode(bool);
 		bool flipSelectedState();
-		bool OnStageRender();
+		bool OnRender();
 		bool setBorderSymbol(char symbol);
 		char getBorderSymbol();
 		bool setSelectedBorderSymbol(char symbol);

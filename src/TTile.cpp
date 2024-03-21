@@ -83,6 +83,32 @@ bool TTile::renderContent() {
 	return true;
 }
 
+bool TTile::OnStageRender() {
+	switch(_render_stage) {
+		case STAGE_ONE:
+			// stage 1
+			renderBorder();
+			_render_stage++;
+			_is_rendering = true;
+			break;
+		case STAGE_TWO:
+			// stage 2
+			renderContent();
+			_render_stage++;
+			break;
+		case STAGE_THREE:
+			// Stage 3
+			renderBorder();
+			_render_stage++;
+			_is_rendering = false;
+			break;
+		default:
+			std::cout << "In TTile::OnStageRender() invalid stage given: " << _render_stage << std::endl;
+			break;
+	}
+	return true;
+}
+
 bool TTile::IsRendering() {
 	return _is_rendering;
 }
@@ -107,38 +133,23 @@ bool TTile::flipSelectedState() {
 	return true;
 }
 
-bool TTile::OnStageRender() {
-	switch(_render_stage) {
-		case STAGE_ONE:
-			// stage 1
-			renderBorder();
-			_render_stage++;
-			_is_rendering = true;
-			break;
-		case STAGE_TWO:
-			// stage 2
-			renderContent();
-			_render_stage++;
-			break;
-		case STAGE_THREE:
-			// Stage 3
-			renderBorder();
-			_render_stage++;
-			_is_rendering = false;
-			break;
-		/*case ALL_STAGES:
-			renderBorder();
+bool TTile::OnRender() {
+	bool render_state = false;
+
+	if(_render_all_mode) {
+		if(!IsRendering()) { // Render all only if there is nothing rendering
+			render_state = renderBorder();
 			std::cout << std::endl;
-			renderContent();
+			render_state = renderContent();
 			std::cout << std::endl;
-			renderBorder();
+			render_state = renderBorder();
 			std::cout << std::endl;
-			break;*/
-		default:
-			std::cout << "In TTile::OnStageRender() invalid stage given: " << _render_stage << std::endl;
-			break;
+		}
+	} else {
+		render_state = OnStageRender();
+		
 	}
-	return true;
+	return render_state;
 }
 
 bool TTile::setBorderSymbol(char symbol) {
