@@ -5,8 +5,7 @@ enum STAGE {
 	INVALID_STAGE = -1,
 	STAGE_ONE,
 	STAGE_TWO,
-	STAGE_THREE,
-	ALL_STAGES
+	STAGE_THREE
 };
 STAGE& operator++(STAGE& stage);
 STAGE operator++(STAGE& stage, int);

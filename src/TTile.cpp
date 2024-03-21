@@ -5,9 +5,11 @@
 // prefix (++stage)
 STAGE& operator++(STAGE& stage) {
 	// check for overflow
-	if(stage != ALL_STAGES)
+	if(stage != STAGE_THREE) {
 		stage = static_cast<STAGE>(stage + 1); // static_cast required
-	
+	} else {
+		stage = STAGE_ONE;
+	}
 	return stage;
 }
 // postfix (stage++)
