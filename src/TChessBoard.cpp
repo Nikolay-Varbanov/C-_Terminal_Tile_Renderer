@@ -101,16 +101,16 @@ bool TChessBoard::OnRender() {
 	
 	for(int rows = 7; rows >=0; rows--) {
 		
-		for(STAGE stage = STAGE_ONE; stage < ALL_STAGES; stage++) {
-			
+		//for(STAGE stage = STAGE_ONE; stage < ALL_STAGES; stage++) {
+		do {	
 			for(int columns = 0; columns < 8; columns++) {
 			
 				_cursor = coordinatesToCursor(columns, rows);
-				_boardTiles[_cursor].OnStageRender(stage);
+				_boardTiles[_cursor].OnStageRender();
 			
 			}
 			std::cout << std::endl;
-		}
+		} while(_boardTiles[_cursor].IsRendering());
 		std::cout << std::endl;
 	}
 	

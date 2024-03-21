@@ -19,6 +19,7 @@ class TTile {
 		// States
 		bool _is_rendering;
 		bool _render_all_mode;
+		STAGE _render_stage;
 		bool _select_state;
 	public: // Constructs
 		TTile();
@@ -32,7 +33,7 @@ class TTile {
 		bool IsRendering();
 		bool setRenderingMode(bool);
 		bool flipSelectedState();
-		bool OnStageRender(STAGE stage);
+		bool OnStageRender();
 		bool setBorderSymbol(char symbol);
 		char getBorderSymbol();
 		bool setSelectedBorderSymbol(char symbol);
